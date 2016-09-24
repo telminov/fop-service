@@ -1,0 +1,17 @@
+<fop version="1.0">
+<renderers>
+	<renderer mime="application/pdf">
+		<fonts>
+			<font metrics-url="fonts/arial.xml" embed-url="fonts/arial.ttf" kerning="yes">
+				<font-triplet name="sans-serif" style="normal" weight="normal"/>
+			</font>
+			<font metrics-url="fonts/arialbd.xml" embed-url="fonts/arialbd.ttf" kerning="yes">
+				<font-triplet name="sans-serif" style="normal" weight="bold"/>
+			</font>
+			<font metrics-url="fonts/ariali.xml" embed-url="fonts/ariali.ttf" kerning="yes">
+				<font-triplet name="sans-serif" style="italic" weight="normal"/>
+			</font>
+		</fonts>
+	</renderer>
+</renderers>
+</fop>
