@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from rest_framework import views
+from rest_framework.response import Response
 
 
-def index(request):
-    return render(request, 'core/index.html')
+class Index(views.APIView):
+    def get(self, request):
+        return Response({'message': 'hello!'})
+
+index = Index.as_view()
