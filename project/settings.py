@@ -121,6 +121,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+FOP_PATH = os.path.join(BASE_DIR, 'fop-1.0')
+
 try:
     from project.local_settings import *
 except ImportError:
