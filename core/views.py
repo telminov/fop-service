@@ -8,6 +8,7 @@ from rest_framework.response import Response
 
 from . import serializers
 
+
 class Index(views.APIView):
     def get(self, request):
         return Response({'message': 'hello!'})
