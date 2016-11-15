@@ -21,7 +21,7 @@ class GeneratePdf(views.APIView):
         serializer = serializers.GeneratePdf(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        filename = serializer.validated_data['filename']
+        filename = serializer.validated_data['filename'].replace('(', '').replace(')', '')
         fo_string = serializer.validated_data['fo_data']
 
         fop_path = settings.FOP_PATH
