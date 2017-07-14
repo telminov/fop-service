@@ -1,6 +1,8 @@
+import os
 import subprocess
 import shutil
 import tempfile
+
 from django.conf import settings
 from django.http import HttpResponse
 from rest_framework import views
@@ -23,11 +25,21 @@ class GeneratePdf(views.APIView):
 
         filename = serializer.validated_data['filename'].replace('(', '').replace(')', '')
         fo_string = serializer.validated_data['fo_data']
+        images_list = serializer.validated_data['images']
 
         fop_path = settings.FOP_PATH
         filename = str(filename)
 
         tmpdir = tempfile.mkdtemp()
+        tmpdir_for_image = tempfile.mkdtemp(dir=tmpdir, prefix='images')
+
+        for image in images_list:
+            path_image = tempfile.mktemp(dir=tmpdir_for_image, prefix=image.name)
+            fo_string = fo_string.replace(image.name, os.path.join('tmp', tmpdir, tmpdir_for_image, os.path.split(path_image)[1]))
+            data_image = open(path_image, 'wb+')
+            for chunk in image.chunks():
+                data_image.write(chunk)
+            data_image.close()
 
         tmp_fo_path = tempfile.mktemp(dir=tmpdir, prefix=filename, suffix='.fo')
         tmp_fo = open(tmp_fo_path, mode='w')
