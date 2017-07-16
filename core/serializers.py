@@ -6,5 +6,5 @@ class GeneratePdf(serializers.Serializer):
     filename = serializers.CharField()
     fo_data = serializers.CharField()
     images = serializers.ListField(
-        child=serializers.ImageField(max_length=None, allow_empty_file=False)
+        child=serializers.ImageField(max_length=None, allow_empty_file=False), required=False
     )
