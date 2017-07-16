@@ -58,5 +58,5 @@ files = [
     ('images', ('2.jpg', open('2.jpg', 'rb'), 'image/jpg'))
 ]
   
-requests.post(YOU URL, data = data, files = files)
+requests.post(YOU URL, data=data, files=files)
 ```
