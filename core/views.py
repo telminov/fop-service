@@ -63,8 +63,7 @@ class GeneratePdf(views.APIView):
         pdf_content = tmp_pdf.read()
         tmp_pdf.close()
 
-        #shutil.rmtree(tmpdir)
-        print(tmpdir)
+        shutil.rmtree(tmpdir)
 
         response = HttpResponse(pdf_content, content_type="application/pdf")
         response['Content-Disposition'] = 'filename=%s.pdf' % filename.encode('utf-8')
