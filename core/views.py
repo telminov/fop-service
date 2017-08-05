@@ -35,8 +35,9 @@ class GeneratePdf(views.APIView):
 
         for image in images_list:
             path_image = tempfile.mktemp(dir=tmpdir_for_image, prefix=image.name)
-            fo_string = fo_string.replace(image.name,
-                                          os.path.join('tmp', tmpdir, tmpdir_for_image, os.path.split(path_image)[1]))
+            fo_string = fo_string.replace('="' + image.name + '"',
+                                          '="' + os.path.join('tmp', tmpdir, tmpdir_for_image,
+                                                              os.path.split(path_image)[1]) + '"')
             data_image = open(path_image, 'wb+')
             for chunk in image.chunks():
                 data_image.write(chunk)
