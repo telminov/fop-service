@@ -1,4 +1,5 @@
 import os
+import re
 import subprocess
 import shutil
 import tempfile
@@ -25,19 +26,20 @@ class GeneratePdf(views.APIView):
 
         filename = serializer.validated_data['filename'].replace('(', '').replace(')', '')
         fo_string = serializer.validated_data['fo_data']
-        images_list = serializer.validated_data['images']
+        images = serializer.validated_data['images']
 
         fop_path = settings.FOP_PATH
         filename = str(filename)
 
         tmpdir = tempfile.mkdtemp()
-        tmpdir_for_image = tempfile.mkdtemp(dir=tmpdir, prefix='images')
 
-        for image in images_list:
-            path_image = tempfile.mktemp(dir=tmpdir_for_image, prefix=image.name)
-            fo_string = fo_string.replace('="' + image.name + '"',
-                                          '="' + os.path.join('tmp', tmpdir, tmpdir_for_image,
-                                                              os.path.split(path_image)[1]) + '"')
+        for image in images:
+            path_image = tempfile.mktemp(dir=tmpdir, prefix=image.name)
+
+            pattern = r'src="url\(.*?' + image.name + r'\'\)"'
+            replacement = 'src="url(\'' + path_image + '\')"'
+            fo_string = re.sub(pattern, replacement, fo_string)
+
             data_image = open(path_image, 'wb+')
             for chunk in image.chunks():
                 data_image.write(chunk)
