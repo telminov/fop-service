@@ -1,20 +1,22 @@
 # docker build -t telminov/fop-service .
 # docker push telminov/fop-service
-# docker run -ti --rm -p 8001:80 -v /var/docker/fop/conf:/conf telminov/fop-service
+# docker run -ti --rm -p 8020:80 -v /var/docker/fop/conf:/conf telminov/fop-service
+# docker run -d --restart always -p 8020:80 telminov/fop-service
 
 FROM ubuntu:16.04
 MAINTAINER telminov <telminov@soft-way.biz>
-
-RUN locale-gen ru_RU.UTF-8
-ENV LANG ru_RU.UTF-8
-ENV LANGUAGE ru_RU:ru
-ENV LC_ALL ru_RU.UTF-8
 
 RUN apt-get update && \
     apt-get install -y \
         vim \
         python3-pip \
+        locales tzdata \
         default-jre
+        
+RUN locale-gen ru_RU.UTF-8
+ENV LANG ru_RU.UTF-8
+ENV LANGUAGE ru_RU:ru
+ENV LC_ALL ru_RU.UTF-8
 
 
 COPY . /opt/fop-service
