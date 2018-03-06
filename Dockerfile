@@ -1,7 +1,7 @@
 # docker build -t telminov/fop-service .
 # docker push telminov/fop-service
 # docker run -ti --rm -p 8020:80 -v /var/docker/fop/conf:/conf telminov/fop-service
-# docker run -d --restart always -p 8020:80 telminov/fop-service
+# docker run -d --restart always --name fop -p 8020:80 telminov/fop-service
 
 FROM ubuntu:16.04
 MAINTAINER telminov <telminov@soft-way.biz>
