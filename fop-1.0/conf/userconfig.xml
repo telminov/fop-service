@@ -11,6 +11,16 @@
 			<font metrics-url="fonts/ariali.xml" embed-url="fonts/ariali.ttf" kerning="yes">
 				<font-triplet name="sans-serif" style="italic" weight="normal"/>
 			</font>
+
+			<font metrics-url="fonts/times.xml" embed-url="fonts/times.ttf" kerning="yes">
+				<font-triplet name="times" style="normal" weight="normal"/>
+			</font>
+			<font metrics-url="fonts/timesbd.xml" embed-url="fonts/timesbd.ttf" kerning="yes">
+				<font-triplet name="times" style="normal" weight="bold"/>
+			</font>
+			<font metrics-url="fonts/timesi.xml" embed-url="fonts/timesi.ttf" kerning="yes">
+				<font-triplet name="times" style="italic" weight="normal"/>
+			</font>
 		</fonts>
 	</renderer>
 </renderers>
