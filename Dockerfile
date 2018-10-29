@@ -11,6 +11,7 @@ RUN apt-get update && \
         vim \
         python3-pip \
         locales tzdata \
+        supervisor \
         default-jre
         
 RUN locale-gen ru_RU.UTF-8
@@ -25,9 +26,12 @@ WORKDIR /opt/fop-service
 RUN pip3 install -r requirements.txt
 RUN cp project/local_settings.sample.py project/local_settings.py
 
+COPY supervisor/supervisord.conf /etc/supervisor/supervisord.conf
+COPY supervisor/prod.conf /etc/supervisor/conf.d/prod.conf
+
 EXPOSE 80
 VOLUME /conf/
 
 CMD test "$(ls /conf/local_settings.py)" || cp project/local_settings.sample.py /conf/local_settings.py; \
     rm project/local_settings.py;  ln -s /conf/local_settings.py project/local_settings.py; \
-    gunicorn project.wsgi --bind=0.0.0.0:80 --workers=5
+    /usr/bin/supervisord -c /etc/supervisor/supervisord.conf --nodaemon
