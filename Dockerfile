@@ -20,8 +20,8 @@ ENV LANGUAGE ru_RU:ru
 ENV LC_ALL ru_RU.UTF-8
 
 
-COPY . /opt/fop-service
-WORKDIR /opt/fop-service
+COPY . /opt/app
+WORKDIR /opt/app
 
 RUN pip3 install -r requirements.txt
 RUN cp project/local_settings.sample.py project/local_settings.py
