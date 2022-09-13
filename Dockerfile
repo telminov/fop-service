@@ -3,14 +3,14 @@
 # docker run -ti --rm -p 8020:80 -v /var/docker/fop/conf:/conf telminov/fop-service
 # docker run -d --restart always --name fop -p 8020:80 telminov/fop-service
 
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER telminov <telminov@soft-way.biz>
 
 RUN apt-get update && \
     apt-get install -y \
         vim \
         python3-pip \
-        locales tzdata \
+        locales \
         supervisor \
         default-jre
         
@@ -23,6 +23,7 @@ ENV LC_ALL ru_RU.UTF-8
 COPY . /opt/app
 WORKDIR /opt/app
 
+RUN python3 -m pip install --upgrade pip
 RUN pip3 install -r requirements.txt
 RUN cp project/local_settings.sample.py project/local_settings.py
 
